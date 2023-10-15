@@ -111,14 +111,12 @@ body {
 }
 
 .center {
-  float: left;
-  width: 185px;
+  display: flex;
   padding: 15px;
   margin: 10px;
   background-color: #FAF8F6;
   margin-top: 5%;
   margin-bottom: 5%;
-  margin-left: 500px;
 }
 
 a {
@@ -152,4 +150,9 @@ footer {
 
 .logo {
   pointer-events: none;
+}
+
+.tam {
+  height: 35px;
+  width: 150px;
 }
