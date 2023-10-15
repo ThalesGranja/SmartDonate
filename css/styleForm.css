@@ -1,0 +1,169 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(30, 30, 30);
+  background: linear-gradient(90deg, rgba(30, 30, 30, 1) 0%, rgba(50, 50, 50, 1) 50%, rgba(62, 62, 62, 1) 100%);
+  min-height: 100vh;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.bubbles {
+  position: relative;
+  display: flex;
+}
+
+.bubbles span {
+  position: relative;
+  width: 30px;
+  height: 23px;
+  background: #a393eb;
+  margin: 0px 4px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 10px #a393eb44,
+    0 0 50px #a393eb,
+    0 0 100px #a393eb;
+  animation: animate 15s linear infinite;
+  animation-duration: calc(125s / var(--i));
+}
+
+.bubbles span:nth-child(even) {
+  background: #F5C7F7;
+  box-shadow: 0 0 0 10px #F5C7F755,
+    0 0 50px #F5C7F7,
+    0 0 100px #F5C7F7;
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(100vh) scale(0);
+  }
+
+  100% {
+    transform: translateY(-10vh) scale(1);
+  }
+}
+
+.containerCent {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 300px;
+  height: 350px;
+  position: absolute;
+  left: calc(50% - 150px);
+  top: calc(50% - 175px);
+  z-index: 10;
+  /*posição Z do elemento, profundidade*/
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.name,
+.email,
+.phone,
+select {
+  padding: 8px 40px;
+  margin: 10px;
+  border-radius: 8px;
+  background-color: rgba(245, 245, 245, 0.85);
+  width: 280px;
+}
+
+h2 {
+  color: whitesmoke;
+  padding: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  pointer-events: none;
+}
+
+.buttonSubmit {
+  padding: 3px;
+  width: 150px;
+  margin-top: 20px;
+  background-color: whitesmoke;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+}
+
+div {
+  position: relative;
+}
+
+.nameFig {
+  width: 27px;
+  height: 27px;
+  pointer-events: none;
+  position: absolute;
+  top: 15px;
+  left: 20px;
+}
+
+.emailFig {
+  width: 42px;
+  height: 39px;
+  pointer-events: none;
+  position: absolute;
+  top: 9px;
+  left: 12px;
+}
+
+.phoneFig {
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  position: absolute;
+  top: 18px;
+  left: 20px;
+}
+
+.donateFig {
+  width: 56px;
+  height: 55px;
+  pointer-events: none;
+  position: absolute;
+  top: -0.3px;
+  left: 3px;
+}
+
+.gray {
+  color: #757575;
+}
+
+.black {
+  color: black;
+}
+
+.buttonBack {
+  background-color: transparent;
+  color: whitesmoke;
+  z-index: 10;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 15px;
+  border: transparent;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.buttonBack:hover {
+  box-shadow: 0 0 15px whitesmoke, inset 0 0 15px whitesmoke;
+  text-shadow: 0 0 15px whitesmoke;
+}

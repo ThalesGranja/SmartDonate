@@ -1,0 +1,155 @@
+header {
+  width: 100%;
+  height: 100%;
+  background: white;
+  flex-wrap: wrap;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  justify-content: space-between;
+  background-color: rgb(163, 147, 235);
+}
+
+body {
+  margin: 0;
+}
+
+.caixa {
+  width: 150px;
+  height: 30px;
+  background: rgb(61, 61, 61);
+  border-radius: 4px;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  margin-top: 27px;
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.columnSide {
+  float: left;
+  width: 23%;
+  padding: 15px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-left: 16px;
+  background-color: #FAF8F6;
+}
+
+.columnSide2 {
+  float: left;
+  width: 23%;
+  padding: 15px;
+  margin: 10px;
+  background-color: #FAF8F6;
+  margin-right: 17px;
+}
+
+.columnMidle {
+  float: left;
+  width: 40%;
+  padding: 15px;
+  margin: 10px;
+  background-color: #FAF8F6;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.row {
+  content: "";
+  display: table;
+  clear: both;
+  background-color: white;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+.columnExplain {
+  float: left;
+  width: 29%;
+  padding: 15px;
+  margin: 10px;
+  background-color: white;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 10px;
+}
+
+.columnExplain2 {
+  float: left;
+  width: 29%;
+  padding: 13px;
+  margin: 10px;
+  background-color: white;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 18px;
+}
+
+.columnExplain3 {
+  float: left;
+  width: 29%;
+  padding: 16px;
+  margin: 10px;
+  background-color: white;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-right: 17px;
+}
+
+.row2 {
+  content: "";
+  display: table;
+  clear: both;
+  background-color: #FAF8F6;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+.center {
+  float: left;
+  width: 185px;
+  padding: 15px;
+  margin: 10px;
+  background-color: #FAF8F6;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 500px;
+}
+
+a {
+  color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a:hover {
+  color: rgb(163, 147, 235);
+}
+
+#t2 {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.growText {
+  font-size: 17px;
+}
+
+p {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+footer {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(163, 147, 235);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.logo {
+  pointer-events: none;
+}
