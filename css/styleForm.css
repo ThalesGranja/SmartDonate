@@ -57,10 +57,10 @@ body {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.5);
   width: 300px;
-  height: 350px;
+  height: 400px;
   position: absolute;
   left: calc(50% - 150px);
-  top: calc(50% - 175px);
+  top: calc(50% - 200px);
   z-index: 10;
   /*posição Z do elemento, profundidade*/
   display: flex;
@@ -75,6 +75,7 @@ form {
 }
 
 .name,
+.document,
 .email,
 .phone,
 select {
@@ -112,6 +113,15 @@ div {
   pointer-events: none;
   position: absolute;
   top: 15px;
+  left: 20px;
+}
+
+.documentFig {
+  width: 25px;
+  height: 24px;
+  pointer-events: none;
+  position: absolute;
+  top: 16px;
   left: 20px;
 }
 
