@@ -19,17 +19,17 @@
       <form>
         <div>
           <img src="figs/name icon.png" class="nameFig">
-          <input type="text" placeholder="Nome completo" class="name" required>
+          <input type="text" placeholder="Nome completo" class="name" id="nome" required>
         </div>
 
         <div>
           <img src="figs/document icon.png" class="documentFig">
-          <input type="text" placeholder="CPF" class="document" required>
+          <input type="text" placeholder="CPF" class="document" id="cpf" required>
         </div>
 
         <div>
           <img src="figs/email icon.png" class="emailFig">
-          <input type="email" placeholder="E-mail" required class="email">
+          <input type="email" placeholder="E-mail" required class="email" id="email">
         </div>
 
         <div>
@@ -39,7 +39,7 @@
 
         <div>
           <img src="figs/donate icon.png" class="donateFig">
-          <select required class="donate">
+          <select required class="donate" id="quantia">
             <option disabled selected hidden>Selecionar Quantia</option>
             <option>R$ 1,00</option>
             <option>R$ 2,00</option>
@@ -51,7 +51,7 @@
           </select>
         </div>
 
-        <input type="submit" value="Enviar Doação" class="buttonSubmit">
+        <button type="button" class="buttonSubmit" onclick="enviarDoacao(event)">Enviar Doação</button>
 
       </form>
     </div>
@@ -99,6 +99,106 @@
       <span style="--i:28"></span>
     </div>
   </div>
+  <script>
+    var doacoes = JSON.parse(localStorage.getItem('doacoes')) || []; //função de adicionar em uma lista e excluir estão prontas nesse código
+
+    function pesquisar(idPesquisa) { //Simulação de um ID para pesquisar
+      //Printar as informações do ID pesquisado
+
+      const doacaoPesquisada = doacoes.find(doacao => doacao.id === idPesquisa);
+
+      console.log(doacaoPesquisada);
+    }
+
+    function limparForm() {
+      document.getElementById('nome').value = '';
+      document.getElementById('cpf').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('telefone').value = '';
+      document.getElementById('quantia').value = 'Selecionar Quantia';
+    }
+
+
+    function enviarDoacao(event) {
+      event.preventDefault();
+
+      // Obter os valores do formulário
+      var nome = document.getElementById('nome').value;
+      var cpf = document.getElementById('cpf').value;
+      var email = document.getElementById('email').value;
+      var telefone = document.getElementById('telefone').value;
+      var quantia = document.getElementById('quantia').value;
+
+
+      // Criar um objeto com os dados do formulário
+      var dadosDoacao = {
+        id: doacoes.length + 1,
+        nome: nome,
+        cpf: cpf,
+        email: email,
+        telefone: telefone,
+        quantia: quantia
+      };
+
+      // Adicionar a nova doação ao array
+      doacoes.push(dadosDoacao);
+
+      // Armazenar os dados no Local Storage
+      localStorage.setItem('doacoes', JSON.stringify(doacoes));
+
+      console.log('Doação enviada!', dadosDoacao);
+      alert("Doação enviada!");
+
+      //Limpando o formulário
+      limparForm();
+
+    }
+
+
+
+
+    function setItem(key, value) {
+      return localStorage.setItem(key, value);
+    }
+
+    function getItem(key) {
+      return localStorage.getItem(key);
+    }
+
+    function removeItem(key) {
+      return localStorage.removeItem(key);
+    }
+
+    function clearItems() {
+      return localStorage.clear();
+    }
+
+
+
+
+    function removerUmaDoacao(idRemocao) { //Simulação de um ID para ser removido
+      const doacaoParaRemover = doacoes.findIndex(doacao => doacao.id === idRemocao);
+      if (doacaoParaRemover >= 0) {
+        //Função para remover
+        doacoes.splice(doacaoParaRemover, 1);
+
+        //Atualizar o Local Storage (mudando para string novamente)
+        localStorage.setItem('doacoes', JSON.stringify(doacoes));
+
+        //Aviso
+        console.log('Doação removida com sucesso!');
+      } else {
+        console.log('Doação não encontrada!');
+      }
+
+    }
+
+    function removerTudoDoacao() {
+      localStorage.clear();
+      doacoes = [];
+    }
+
+  </script>
 </body>
 
 </html>
