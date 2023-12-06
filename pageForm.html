@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styleForm.css">
-  <title>Document</title>
+  <title>Formulário Smart Donate</title>
 </head>
 
 <body>
@@ -99,15 +99,48 @@
       <span style="--i:28"></span>
     </div>
   </div>
+
+  <div class="lista">Doações:</div>
+  <!-- Lista de doações -->
+  <ul id="listaDoacoes"></ul>
+
+  <div class="lista">Remover Doação
+    <input type="text" placeholder="Coloque o ID" id="removerUm">
+    <button type="button" class="buttonSubmit" onclick="removerUmaDoacao()">Remover</button>
+  </div>
+  <div class="lista">Remover Todas Doações
+    <button type="button" class="buttonSubmit" onclick="removerTudoDoacao()">Remover Tudo</button>
+  </div>
+  <div class="lista">Pesquisa por ID
+    <input type="text" placeholder="Coloque o ID" id="pesquisa">
+    <button type="button" class="buttonSubmit" onclick="pesquisar()">Pesquisar</button>
+  </div>
+
   <script>
     var doacoes = JSON.parse(localStorage.getItem('doacoes')) || []; //função de adicionar em uma lista e excluir estão prontas nesse código
 
-    function pesquisar(idPesquisa) { //Simulação de um ID para pesquisar
-      //Printar as informações do ID pesquisado
+    function pesquisar() {
+      // Obter o valor do campo de pesquisa
+      var idPesquisa = document.getElementById('pesquisa').value;
 
-      const doacaoPesquisada = doacoes.find(doacao => doacao.id === idPesquisa);
+      // Converter o valor para um número inteiro
+      idPesquisa = parseInt(idPesquisa);
 
-      console.log(doacaoPesquisada);
+      // Verificar se o ID de pesquisa é um número válido
+      if (!isNaN(idPesquisa)) {
+        // Pesquisar a doação pelo ID
+        const doacaoPesquisada = doacoes.find(doacao => doacao.id === idPesquisa);
+
+        if (doacaoPesquisada) {
+          // Exibir as informações do usuário encontrado em um alert
+          var mensagem = `ID: ${doacaoPesquisada.id}\nNome: ${doacaoPesquisada.nome}\nCPF: ${doacaoPesquisada.cpf}\nEmail: ${doacaoPesquisada.email}\nTelefone: ${doacaoPesquisada.telefone}\nQuantia: ${doacaoPesquisada.quantia}\nData da Doação: ${doacaoPesquisada.data}`;
+          alert(mensagem);
+        } else {
+          alert('Doação não encontrada!');
+        }
+      } else {
+        alert('ID de pesquisa inválido!');
+      }
     }
 
     function limparForm() {
@@ -129,15 +162,19 @@
       var telefone = document.getElementById('telefone').value;
       var quantia = document.getElementById('quantia').value;
 
+      // Obter a data atual
+      var dataAtual = new Date();
+      var dataFormatada = `${dataAtual.getDate()}/${dataAtual.getMonth() + 1}/${dataAtual.getFullYear()} ${dataAtual.getHours()}:${dataAtual.getMinutes()}`;
 
-      // Criar um objeto com os dados do formulário
+      // Criar um objeto com os dados do formulário e a data
       var dadosDoacao = {
         id: doacoes.length + 1,
         nome: nome,
         cpf: cpf,
         email: email,
         telefone: telefone,
-        quantia: quantia
+        quantia: quantia,
+        data: dataFormatada
       };
 
       // Adicionar a nova doação ao array
@@ -152,50 +189,53 @@
       //Limpando o formulário
       limparForm();
 
+      // Adicionar à lista no final da página
+      var lista = document.getElementById('listaDoacoes');
+      var listItem = document.createElement('li');
+      listItem.textContent = `ID: ${dadosDoacao.id} | ${dadosDoacao.nome} | ${dadosDoacao.cpf} | ${dadosDoacao.email} | ${dadosDoacao.telefone} | ${dadosDoacao.quantia} | Enviada em: ${dadosDoacao.data}`;
+      lista.appendChild(listItem);
     }
 
+    function removerUmaDoacao() {
+      // Obter o valor do campo de remoção
+      var idRemocao = document.getElementById('removerUm').value;
 
+      // Converter o valor para um número inteiro
+      idRemocao = parseInt(idRemocao);
 
+      // Verificar se o ID de remoção é um número válido
+      if (!isNaN(idRemocao)) {
+        // Encontrar o índice da doação a ser removida
+        const doacaoParaRemover = doacoes.findIndex(doacao => doacao.id === idRemocao);
 
-    function setItem(key, value) {
-      return localStorage.setItem(key, value);
-    }
+        if (doacaoParaRemover >= 0) {
+          // Remover a doação
+          doacoes.splice(doacaoParaRemover, 1);
 
-    function getItem(key) {
-      return localStorage.getItem(key);
-    }
+          // Atualizar o Local Storage
+          localStorage.setItem('doacoes', JSON.stringify(doacoes));
 
-    function removeItem(key) {
-      return localStorage.removeItem(key);
-    }
+          // Remover o elemento da lista na interface
+          var lista = document.getElementById('listaDoacoes');
+          lista.removeChild(lista.childNodes[doacaoParaRemover]);
 
-    function clearItems() {
-      return localStorage.clear();
-    }
-
-
-
-
-    function removerUmaDoacao(idRemocao) { //Simulação de um ID para ser removido
-      const doacaoParaRemover = doacoes.findIndex(doacao => doacao.id === idRemocao);
-      if (doacaoParaRemover >= 0) {
-        //Função para remover
-        doacoes.splice(doacaoParaRemover, 1);
-
-        //Atualizar o Local Storage (mudando para string novamente)
-        localStorage.setItem('doacoes', JSON.stringify(doacoes));
-
-        //Aviso
-        console.log('Doação removida com sucesso!');
-      } else {
-        console.log('Doação não encontrada!');
+          console.log('Doação removida com sucesso!');
+        } else {
+          console.log('Doação não encontrada!');
+        }
       }
-
     }
 
     function removerTudoDoacao() {
+      // Limpar o Local Storage e a matriz de doações
       localStorage.clear();
       doacoes = [];
+
+      // Limpar a lista na interface
+      var lista = document.getElementById('listaDoacoes');
+      lista.innerHTML = ''; // Limpar todo o conteúdo da lista
+
+      console.log('Todas as doações removidas com sucesso!');
     }
 
   </script>
